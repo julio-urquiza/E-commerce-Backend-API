@@ -1,6 +1,7 @@
 import express from "express"
 import passport from './config/jwt-strategy.js';
 import { initMongoDB } from "./config/db.js";
+import routerUser from "./routes/user-router.js"
 import 'dotenv/config'
 
 const app = express()
@@ -10,12 +11,13 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 // app.use(express.static('./src/public'))
 
+// passport
 app.use(passport.initialize())
 
-app.get('/',(req,res) => {
-    res.json({message: 'funciona'}) 
-})
+// ruta user
+app.get('/api',routerUser)
 
+// MongoDB
 initMongoDB()
     .then(() => console.log("conectado a mongo"))
     .catch((error) => console.log(error))
