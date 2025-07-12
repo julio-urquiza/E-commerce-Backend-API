@@ -2,6 +2,8 @@ import express from "express"
 import passport from './config/jwt-strategy.js';
 import { initMongoDB } from "./config/db.js";
 import routerUser from "./routes/user-router.js"
+import routerProducts from "./routes/products.router.js"
+import routerCarts from "./routes/cart.router.js"
 import 'dotenv/config'
 
 const app = express()
@@ -14,8 +16,10 @@ app.use(express.urlencoded({extended: true}))
 // passport
 app.use(passport.initialize())
 
-// ruta user
+// rutas
 app.get('/api',routerUser)
+app.use('/api/products',routerProducts)
+app.use('/api/carts',routerCarts)
 
 // MongoDB
 initMongoDB()
