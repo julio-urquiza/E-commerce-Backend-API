@@ -17,7 +17,7 @@ app.use(express.urlencoded({extended: true}))
 app.use(passport.initialize())
 
 // rutas
-app.get('/api',routerUser)
+app.use('/api',routerUser)
 app.use('/api/products',routerProducts)
 app.use('/api/carts',routerCarts)
 

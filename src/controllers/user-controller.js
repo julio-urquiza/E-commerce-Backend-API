@@ -11,7 +11,7 @@ class UserController {
             const response = await this.service.register(req.body);
             res.json(response);
         } catch (error) {
-            next(error)
+            res.status(error.status).json({message: error.message})
         }
     }
 
@@ -22,7 +22,7 @@ class UserController {
             const token = this.service.generateTokenUser(user)
             res.json({ user, token })
         } catch (error) {
-            next(error)
+            res.status(error.status).json({message: error.message})
         }
     }
 

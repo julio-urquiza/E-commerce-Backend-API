@@ -11,6 +11,6 @@ export const generateToken = (user, clave) => {
         role: user.role
     }
     return jwt.sign(payload, clave, {
-        expiresIn: "20m",
+        expiresIn: "60m",
     })
 }
