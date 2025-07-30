@@ -31,6 +31,7 @@ Link al repositorio de GitHub con el proyecto completo, sin incluir la carpeta n
 Esta actividad es una parte fundamental de la preparación para la entrega del proyecto final y se centra en la implementación de mecanismos de seguridad y gestión de usuarios, que son esenciales para el desarrollo de aplicaciones backend robustas y seguras.
 
 ## Criterios:
+
 ### Modelo de Usuario y Encriptación de Contraseña:
 * Crear modelo User con los campos especificados y se ha implementado la encriptación de la contraseña utilizando bcrypt.hashSync.
 * Que el modelo User incluya todos los campos requeridos.

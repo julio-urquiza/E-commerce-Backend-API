@@ -22,7 +22,7 @@ class UserService extends Service{
       //crear user
       const response = await this.dao.create({
         ...body,
-        product:carrito._id,
+        cart:carrito._id,
         password: createHash(password),
       });
       if (!response) throw new CustomError("Error al registrar usuario", 400);
