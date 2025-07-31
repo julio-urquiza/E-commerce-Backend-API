@@ -10,7 +10,9 @@ export const generateToken = (user, clave) => {
         age: user.age,
         role: user.role
     }
-    return jwt.sign(payload, clave, {
-        expiresIn: "60m",
-    })
+    return jwt.sign(payload, clave, {expiresIn: "60m"})
+}
+
+export const generateTokenPass = (email, clave) => {
+    return jwt.sign({email}, clave, {expiresIn: "60m"})
 }
