@@ -30,5 +30,4 @@ class router extends CustomRouter{
     }
 }
 
-const cartRouter = new router() 
-export default cartRouter
+export default new router() 
