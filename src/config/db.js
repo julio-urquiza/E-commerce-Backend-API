@@ -1,11 +1,25 @@
-import { connect } from "mongoose";
-import 'dotenv/config'
+import mongoose from 'mongoose'
 
-export const initMongoDB = async () => {
-    try {
-        await connect(process.env.MONGO_CONEXION);
-    } 
-    catch (error) {
-        throw new Error("Error al conectar a la base de datos");
+class MongoSingleton {
+    static instance
+
+    constructor() {
+        this.connection = null
+    }
+
+    async connect(uri) {
+        if (!MongoSingleton.instance) {
+            try {
+                this.connection = await mongoose.connect(uri);
+                console.log('MongoDB conectado')
+                MongoSingleton.instance = this;
+            } catch (error) {
+                console.error('Error conectando a MongoDB:', error)
+                throw error
+            }
+        }
+        return MongoSingleton.instance
     }
 }
+
+export default new MongoSingleton()
