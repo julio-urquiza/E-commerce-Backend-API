@@ -1,16 +1,17 @@
-import { Router } from "express"
+import CustomRouter from "./custom.router.js";
 import { userController } from "../controllers/user-controller.js"
 import { verifyResetToken } from "../middlewares/verifyTokenPass.js"
 import passport from "passport"
 
+class router extends CustomRouter{
+    init() {
+        this.post("/register", ['PUBLIC'], userController.register)
+        this.post("/login", ['PUBLIC'], userController.login)
+        this.get("/sessions/current", ['PUBLIC'], passport.authenticate("current",{ session: false }),userController.usuarioFormat)
+        this.get("/recover-password", ['PUBLIC'], userController.recoverPassword)
+        this.put("/reset-password/:token", ['PUBLIC'], verifyResetToken, userController.resetPassword)
+    }
+}
 
-const router = Router();
-
-router.post("/register", userController.register)
-router.post("/login", userController.login)
-router.get("/sessions/current", passport.authenticate("current",{ session: false }),userController.usuarioFormat)
-router.get("/recover-password", userController.recoverPassword)
-// router.put("/reset-password/:token", verifyResetToken)
-router.put("/reset-password/:token", verifyResetToken, userController.resetPassword)
-
-export default router
+const userRouter = new router()
+export default userRouter
