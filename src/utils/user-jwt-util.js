@@ -6,7 +6,7 @@ export const generateToken = (user, clave) => {
         first_name: user.first_name,
         last_name: user.last_name,
         email: user.email,
-        carrito: user.product,
+        cart: user.cart,
         age: user.age,
         role: user.role
     }

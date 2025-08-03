@@ -14,6 +14,36 @@ class ProductService extends Service {
             throw error
         }
     }
+
+    
+    separateProducts = async (listProducts) => {
+        try {
+            return listProducts.reduce(async (lists, item) => {
+                const productDB = await this.dao.getById(item.product)
+                if(productDB.quantity >= item.quantity){
+                    lists.aceptedProducts.push(item)
+                    productDB.quantity -= item.quantity
+                    productDB.save()
+                }
+                else{
+                    lists.rejectedProducts.push(item)
+                }
+            },{rejectedProducts:[], aceptedProducts:[]})
+        } catch(error) {
+            throw error
+        }
+    }
+
+    calculatePrice = async (listProducts) => {
+        try {
+            return listProducts.reduce(async (acum, item) => {
+                const productDB = await this.dao.getById(item.product)
+                acum += item.quantity * productDB.price
+            },0)
+        } catch(error) {
+            throw error
+        }
+    }
 }
 
 export const productService = new ProductService(productDao)

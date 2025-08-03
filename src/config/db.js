@@ -11,7 +11,7 @@ class MongoSingleton {
         if (!MongoSingleton.instance) {
             try {
                 this.connection = await mongoose.connect(uri);
-                console.log('MongoDB conectado')
+                console.log('Conectado a Mongo')
                 MongoSingleton.instance = this;
             } catch (error) {
                 console.error('Error conectando a MongoDB:', error)

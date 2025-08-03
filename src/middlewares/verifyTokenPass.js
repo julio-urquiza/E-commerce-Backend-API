@@ -10,4 +10,4 @@ export const verifyResetToken = (req, res, next) => {
     } catch (error) {
         return res.status(401).json({ error: 'Invalid token' })
     }
-};
+}

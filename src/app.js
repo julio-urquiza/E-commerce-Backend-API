@@ -15,4 +15,4 @@ app.use('/',router)
 
 await mongooseSingleton.connect(process.env.MONGO_CONEXION);
 
-app.listen(process.env.PUERTO, () => console.log(`http://localhost:${process.env.PUERTO}/`))
+app.listen(process.env.PUERTO, () => console.log('Servidor funcionando'))

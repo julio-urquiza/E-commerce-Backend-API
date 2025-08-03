@@ -1,6 +1,10 @@
-import { cartDao } from "../daos/mongoDB/cart-dao.js"
-import CustomError from "../utils/custom-error.js"
 import Service from "./service.js"
+import { cartDao } from "../daos/mongoDB/cart-dao.js"
+import { ticketService } from "./ticket-service.js"
+import { productService } from "./product-service.js"
+import { makeRandomCode } from '../utils/random-string.js'
+import CustomError from "../utils/custom-error.js"
+
 
 class CartService extends Service {
     constructor(dao){
@@ -48,6 +52,25 @@ class CartService extends Service {
         try{
             return (await this.dao.getAll()).populate(path,select)
         }catch(error){
+            throw error
+        }
+    }
+
+    createTicket = async (user) => {
+        try {
+            const cart = await this.dao.getById(user.cart)
+            const {rejectedProducts, aceptedProducts} = await productService.separateProducts(cart.products)
+            cart.products = rejectedProducts
+            cart.save()
+            return await ticketService.create(
+                {
+                    code: makeRandomCode(20),
+                    amount: productService.calculatePrice(aceptedProducts),
+                    purchaser: user.email,
+                    products: aceptedProducts
+                }
+            )
+        } catch (error) {
             throw error
         }
     }

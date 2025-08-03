@@ -84,6 +84,16 @@ class CartController {
         }
     }
 
+    completePurchase = async (req, res) => {
+        try {
+            const ticket = await this.service.createTicket(req.user)
+            res.send(ticket)
+        }
+        catch(error) {
+            res.send({status: 'Ocurrio un error', error})
+        }
+    }
+
 }
 
 export const cartController = new CartController(cartService);
