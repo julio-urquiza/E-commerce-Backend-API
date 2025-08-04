@@ -1,11 +1,11 @@
 import passport from "passport"
 
-export const checkRoles = (roles) => {
+const checkRoles = (roles) => {
     return (req, res, next) => {
         if (roles.includes("PUBLIC")) return next()
 
         passport.authenticate("current", { session: false }, (err, user, info) => {
-            if (err) return next(err);
+            if (err) return next(err)
             if (!user || !roles.includes(user.role.toUpperCase())) {
                 return res.status(403).send({ error: "Unauthorized" })
             }
@@ -14,4 +14,5 @@ export const checkRoles = (roles) => {
             next()
         })(req, res, next)
     }
-};
+}
+export default checkRoles

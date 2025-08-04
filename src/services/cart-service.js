@@ -11,12 +11,21 @@ class CartService extends Service {
         super(dao)
     }
 
-    agregarProducto = async (id, body) => {
+    addProducts = async (id, products) => {
         try {
-            if(await this.dao.exists({_id:id, 'products.product': body.product })){
-                return await this.dao.updateOne({_id: id, 'products.product': body.product},{ $inc: {'products.$.quantity': body.quantity} })
-            }
-            return await this.dao.updateOne({_id: id},{ $push: { products: body } })
+            const cart = await this.dao.getById(id)
+            products.forEach(i => {
+                const productFound = cart.products.find(item => item.product == i.product)
+                if(productFound) {
+                    productFound.quantity += i.quantity
+                    return
+                }
+                else {
+                    cart.products.push(i)
+                }
+            })
+            await cart.save()
+            return cart
         } catch (error) {
             throw error
         }
@@ -38,19 +47,19 @@ class CartService extends Service {
         }
     }
 
-    findByIdPopulate = async (id , path, select) => {
+    findByIdPopulate = async (id) => {
         try{
             // const cart = await this.dao.getById(id)
             // return cart.populate('products.product');
-            return (await this.dao.getById(id)).populate(path, select)
+            return (await this.dao.getById(id)).populate('products.product', '_id title price')
         }catch (error) {
             throw error
         }
     }
 
-    findPopulate = async (path, select) => {
+    findPopulate = async () => {
         try{
-            return (await this.dao.getAll()).populate(path,select)
+            return (await this.dao.getAll()).populate('products.product', '_id title price')
         }catch(error){
             throw error
         }

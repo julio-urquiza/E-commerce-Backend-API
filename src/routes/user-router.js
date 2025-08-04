@@ -1,7 +1,7 @@
 import CustomRouter from "./custom.router.js";
 import { userController } from "../controllers/user-controller.js"
 import { verifyResetToken } from "../middlewares/verifyTokenPass.js"
-import { checkRoles } from "../middlewares/checkRoles.js";
+import checkRoles from "../middlewares/checkRoles.js";
 
 class router extends CustomRouter{
     init() {

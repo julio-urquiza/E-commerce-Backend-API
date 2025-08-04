@@ -1,11 +1,11 @@
-import { cartService } from "../services/cart-service.js";
+import { cartService } from "../services/cart-service.js"
 
 class CartController {
     constructor(service) {
-        this.service = service;
+        this.service = service
     }
 
-    crearCarritos = async (req, res) => {
+    createCart = async (req, res) => {
         try{
             const cart = req.body
             const result = await this.service.create(cart)
@@ -16,11 +16,32 @@ class CartController {
         }
     }
 
-    agregarProductoAlCarrito = async (req, res) => {
+    AddProductCart = async (req, res) => {
         try{
-            const {carrito} = req.user
+            const {cart} = req.user
             const products = req.body
-            const cart = await this.service.agregarProducto(carrito,products)
+            const result = await this.service.addProducts(cart,products)
+            res.send(result)
+        }
+        catch(error){
+            res.send({status: 'Ocurrio un error', error})
+        }
+    }
+
+    getAllProducts = async (req, res) => {
+        try{
+            const {cart} = req.user
+            const result = await this.service.findByIdPopulate(cart)
+            res.send(result)
+        }
+        catch(error){
+            res.send({status: 'Ocurrio un error', error})
+        }
+    }
+
+    listAllCarts = async (req, res) => {
+        try{
+            const cart = await this.service.findPopulate()
             res.send(cart)
         }
         catch(error){
@@ -28,32 +49,11 @@ class CartController {
         }
     }
 
-    traerTodosLosProductosDeUnCarritoPopulate = async (req, res) => {
+    UpdateQuantityCart = async (req, res) => {
         try{
-            const {carrito} = req.user
-            const cart = await this.service.findByIdPopulate(carrito,'products.product', '_id title price')
-            res.send(cart)
-        }
-        catch(error){
-            res.send({status: 'Ocurrio un error', error})
-        }
-    }
-
-    listarTodosLosCarritos = async (req, res) => {
-        try{
-            const cart = await this.service.findPopulate('products.product', '_id title price')
-            res.send(cart)
-        }
-        catch(error){
-            res.send({status: 'Ocurrio un error', error})
-        }
-    }
-
-    actualizarCantProductosDeCarrito = async (req, res) => {
-        try{
-            const {carrito} = req.user
-            const cart = await this.service.updateOne({_id: carrito , 'products.product': req.body.product},{ $set: {'products.$.quantity': req.body.quantity } })
-            res.send(cart)
+            const {cart} = req.user
+            const result = await this.service.updateOne({_id: cart , 'products.product': req.body.product},{ $set: {'products.$.quantity': req.body.quantity } })
+            res.send(result)
         }
         catch(error){
             res.send({status: 'Ocurrio un error', error})
@@ -61,23 +61,23 @@ class CartController {
     }
 
 
-    eliminarTodosLosProductosDeCarrito = async (req, res) => {
+    RemoveAllProductsCart = async (req, res) => {
         try{
-            const {carrito} = req.user
-            const cart = await this.service.eliminarTodosProductosCarrito(carrito)
-            res.send(cart)
+            const {cart} = req.user
+            const result = await this.service.eliminarTodosProductosCarrito(cart)
+            res.send(result)
         }
         catch(error){
             res.send({status: 'Ocurrio un error', error})
         }
     }
 
-    eliminarProductoSeleccionadoDeCarrito = async (req, res) => {
+    RemoveProductCart = async (req, res) => {
         try{
-            const {carrito} = req.user
+            const {cart} = req.user
             const {pid} = req.params
-            const cart = await this.service.eliminarProductoCarrito(carrito, pid)
-            res.send(cart)
+            const result = await this.service.eliminarProductoCarrito(cart, pid)
+            res.send(result)
         }
         catch(error){
             res.send({status: 'Ocurrio un error', error})
@@ -86,14 +86,13 @@ class CartController {
 
     completePurchase = async (req, res) => {
         try {
-            const ticket = await this.service.createTicket(req.user)
-            res.send(ticket)
+            const result = await this.service.createTicket(req.user)
+            res.send(result)
         }
         catch(error) {
             res.send({status: 'Ocurrio un error', error})
         }
     }
-
 }
 
-export const cartController = new CartController(cartService);
+export default new CartController(cartService)

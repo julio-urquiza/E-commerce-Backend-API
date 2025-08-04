@@ -1,6 +1,6 @@
 import CustomRouter from "./custom.router.js"
 import { productController } from "../controllers/product-controller.js"
-import { checkRoles } from "../middlewares/checkRoles.js"
+import checkRoles from "../middlewares/checkRoles.js"
 
 class router extends CustomRouter{
     init() {
