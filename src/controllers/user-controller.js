@@ -1,15 +1,15 @@
-import { userService } from "../services/user-service.js";
+import userService from "../services/user-service.js"
 import UserDTO from '../dtos/user-dto.js'
 
 class UserController {
     constructor(service) {
-        this.service = service;
+        this.service = service
     }
 
     register = async (req, res) => {
         try {
-            const response = await this.service.register(req.body);
-            res.json(response);
+            const response = await this.service.register(req.body)
+            res.json(response)
         } catch (error) {
             res.status(error.status).json({message: error.message})
         }
@@ -26,7 +26,7 @@ class UserController {
         }
     }
 
-    usuarioFormat = async (req, res) => {
+    userFormat = async (req, res) => {
         try {
             if(!req.user) res.status(400).json({message: 'el usuario no existe'})
             res.json(new UserDTO(req.user))
@@ -60,4 +60,4 @@ class UserController {
     }
 }
 
-export const userController = new UserController(userService);
+export default new UserController(userService);

@@ -1,8 +1,8 @@
-import { productService } from "../services/product-service.js";
+import productService from "../services/product-service.js"
 
 class ProductController {
     constructor(service) {
-        this.service = service;
+        this.service = service
     }
 
     traerDeProductosFormateados = async(req, res) => {
@@ -15,7 +15,6 @@ class ProductController {
     
             if(sort === 'asc') opciones.sort = {price: 1}
             if(sort === 'desc') opciones.sort = {price: -1}
-    
     
             const products = await this.service.paginate(query, opciones)
             res.json({
@@ -84,4 +83,4 @@ class ProductController {
 
 }
 
-export const productController = new ProductController(productService);
+export default new ProductController(productService)

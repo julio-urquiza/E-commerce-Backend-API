@@ -1,4 +1,4 @@
-export const makeRandomCode = (length) => {
+const makeRandomCode = (length) => {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
@@ -7,3 +7,5 @@ export const makeRandomCode = (length) => {
     }
     return result;
 }
+
+export default makeRandomCode

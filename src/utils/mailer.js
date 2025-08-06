@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport({
     }
 })
 
-export const sendMail = async (email, subject, html ) => {
+const sendMail = async (email, subject, html ) => {
     try {
         const info = await transporter.sendMail({
                 from: process.env.GMAIL_MAIL, 
@@ -29,3 +29,5 @@ export const sendMail = async (email, subject, html ) => {
         throw error
     }
 }
+
+export default sendMail

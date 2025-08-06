@@ -1,4 +1,4 @@
-import { cartService } from "../services/cart-service.js"
+import cartService from "../services/cart-service.js"
 
 class CartController {
     constructor(service) {

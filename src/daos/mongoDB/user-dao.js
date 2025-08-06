@@ -1,5 +1,5 @@
-import { userModel } from "./models/user-model.js";
-import MongoDao from "./mongo-dao.js";
+import { userModel } from "./models/user-model.js"
+import MongoDao from "./mongo-dao.js"
 
 class UserDao extends MongoDao {
     constructor(model) {
@@ -8,11 +8,11 @@ class UserDao extends MongoDao {
 
     getByEmail = async (email) => {
         try {
-            return await this.model.findOne({ email });
+            return await this.model.findOne({ email })
         } catch (error) {
             throw new Error(error)
         }
     }
 }
 
-export const userDao = new UserDao(userModel)
+export default new UserDao(userModel)

@@ -1,4 +1,4 @@
-import { productDao } from "../daos/mongoDB/product-dao.js"
+import productDao from "../daos/mongoDB/product-dao.js"
 import Service from "./service.js"
 
 class ProductService extends Service {
@@ -49,4 +49,4 @@ class ProductService extends Service {
     }
 }
 
-export const productService = new ProductService(productDao)
+export default new ProductService(productDao)

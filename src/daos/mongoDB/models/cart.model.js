@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const CartSchema = new mongoose.Schema({
     products: [
@@ -14,12 +14,12 @@ const CartSchema = new mongoose.Schema({
             }
         }
     ]
-});
+})
 
 // Middleware pre que realiza la población automáticamente
 // cartSchema.pre(['find', 'findOne'], function (next) {
-//     this.populate('products.product', '_id title price');
+//     this.populate('products.product', '_id title price')
 //     next();
-// });
+// })
 
-export const cartModel = mongoose.model("carts", CartSchema);
+export const cartModel = mongoose.model("carts", CartSchema)

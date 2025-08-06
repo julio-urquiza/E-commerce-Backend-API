@@ -1,5 +1,5 @@
-import { ticketModel } from "./models/ticket.model.js";
-import MongoDao from "./mongo-dao.js";
+import { ticketModel } from "./models/ticket.model.js"
+import MongoDao from "./mongo-dao.js"
 
 class TicketDao extends MongoDao {
     constructor(model) {
@@ -7,4 +7,4 @@ class TicketDao extends MongoDao {
     }
 }
 
-export const ticketDao = new TicketDao(ticketModel);
+export default new TicketDao(ticketModel)

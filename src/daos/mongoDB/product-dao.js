@@ -1,9 +1,9 @@
-import { productModel } from "./models/product.model.js";
-import MongoDao from "./mongo-dao.js";
+import { productModel } from "./models/product.model.js"
+import MongoDao from "./mongo-dao.js"
 
 class ProductDao extends MongoDao {
     constructor(model) {
-        super(model);
+        super(model)
     }
 
     paginate = async (query, opciones) => {
@@ -15,4 +15,4 @@ class ProductDao extends MongoDao {
     }
 }
 
-export const productDao = new ProductDao(productModel);
+export default new ProductDao(productModel)

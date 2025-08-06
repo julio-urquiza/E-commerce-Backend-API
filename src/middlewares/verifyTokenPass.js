@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import "dotenv/config"
 
-export const verifyResetToken = (req, res, next) => {
+const verifyResetToken = (req, res, next) => {
     try {
         const { token } = req.params
         const decoded = jwt.verify(token, process.env.CLAVEPASS)
@@ -11,3 +11,5 @@ export const verifyResetToken = (req, res, next) => {
         return res.status(401).json({ error: 'Invalid token' })
     }
 }
+
+export default verifyResetToken

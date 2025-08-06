@@ -1,5 +1,4 @@
-import { ticketDao } from "../daos/mongoDB/ticket-dao.js"
-import CustomError from "../utils/custom-error.js"
+import ticketDao from "../daos/mongoDB/ticket-dao.js"
 import Service from "./service.js"
 
 class TicketService extends Service {
@@ -8,4 +7,4 @@ class TicketService extends Service {
     }
 }
 
-export const ticketService = new TicketService(ticketDao)
+export default new TicketService(ticketDao)

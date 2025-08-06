@@ -1,8 +1,8 @@
 import Service from "./service.js"
-import { cartDao } from "../daos/mongoDB/cart-dao.js"
-import { ticketService } from "./ticket-service.js"
-import { productService } from "./product-service.js"
-import { makeRandomCode } from '../utils/random-string.js'
+import cartDao from "../daos/mongoDB/cart-dao.js"
+import ticketService from "./ticket-service.js"
+import productService from "./product-service.js"
+import makeRandomCode from '../utils/random-string.js'
 import CustomError from "../utils/custom-error.js"
 
 
@@ -50,7 +50,7 @@ class CartService extends Service {
     getByIdPop = async (id) => {
         try{
             // const cart = await this.dao.getById(id)
-            // return cart.populate('products.product');
+            // return cart.populate('products.product')
             return (await this.dao.getById(id)).populate('products.product', '_id title price')
         }catch (error) {
             throw error
@@ -87,4 +87,4 @@ class CartService extends Service {
     }
 }
 
-export const cartService = new CartService(cartDao)
+export default new CartService(cartDao)
