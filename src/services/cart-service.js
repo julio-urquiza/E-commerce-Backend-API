@@ -31,7 +31,7 @@ class CartService extends Service {
         }
     }
 
-    eliminarTodosProductosCarrito = async (id) => {
+    deleteAllProducts = async (id) => {
         try {
             return await this.dao.update(id,{ $set: { products: [] } })
         } catch (error) {
@@ -39,7 +39,7 @@ class CartService extends Service {
         }
     }
 
-    eliminarProductoCarrito = async (cid, pid) => {
+    deleteProduct = async (cid, pid) => {
         try {
             return await this.service.update(cid,{ $pull: { products: { product: pid }}})
         } catch (error) {
@@ -47,7 +47,7 @@ class CartService extends Service {
         }
     }
 
-    findByIdPopulate = async (id) => {
+    getByIdPop = async (id) => {
         try{
             // const cart = await this.dao.getById(id)
             // return cart.populate('products.product');
@@ -70,15 +70,17 @@ class CartService extends Service {
             const cart = await this.dao.getById(user.cart)
             const {rejectedProducts, aceptedProducts} = await productService.separateProducts(cart.products)
             cart.products = rejectedProducts
-            cart.save()
-            return await ticketService.create(
+            await cart.save()
+            if(!aceptedProducts.length) throw new Error('No se pudo agregar los productos a la compra')
+            const ticket = await ticketService.create(
                 {
                     code: makeRandomCode(20),
-                    amount: productService.calculatePrice(aceptedProducts),
+                    amount: await productService.calculatePrice(aceptedProducts),
                     purchaser: user.email,
                     products: aceptedProducts
                 }
             )
+            return ticket.populate('products.product', '_id title price')
         } catch (error) {
             throw error
         }

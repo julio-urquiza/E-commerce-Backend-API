@@ -31,7 +31,7 @@ class CartController {
     getAllProducts = async (req, res) => {
         try{
             const {cart} = req.user
-            const result = await this.service.findByIdPopulate(cart)
+            const result = await this.service.getByIdPop(cart)
             res.send(result)
         }
         catch(error){
@@ -64,7 +64,7 @@ class CartController {
     RemoveAllProductsCart = async (req, res) => {
         try{
             const {cart} = req.user
-            const result = await this.service.eliminarTodosProductosCarrito(cart)
+            const result = await this.service.deleteAllProducts(cart)
             res.send(result)
         }
         catch(error){
@@ -76,7 +76,7 @@ class CartController {
         try{
             const {cart} = req.user
             const {pid} = req.params
-            const result = await this.service.eliminarProductoCarrito(cart, pid)
+            const result = await this.service.deleteProduct(cart, pid)
             res.send(result)
         }
         catch(error){
@@ -90,7 +90,7 @@ class CartController {
             res.send(result)
         }
         catch(error) {
-            res.send({status: 'Ocurrio un error', error})
+            res.send({status: 'Ocurrio un error', message: error.message })
         }
     }
 }

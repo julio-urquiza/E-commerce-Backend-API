@@ -1,5 +1,4 @@
 import { productDao } from "../daos/mongoDB/product-dao.js"
-import CustomError from "../utils/custom-error.js"
 import Service from "./service.js"
 
 class ProductService extends Service {
@@ -18,17 +17,19 @@ class ProductService extends Service {
     
     separateProducts = async (listProducts) => {
         try {
-            return listProducts.reduce(async (lists, item) => {
+            const lists = {rejectedProducts:[], aceptedProducts:[]}
+            for (const item of listProducts){
                 const productDB = await this.dao.getById(item.product)
-                if(productDB.quantity >= item.quantity){
+                if(productDB.stock >= item.quantity){
                     lists.aceptedProducts.push(item)
-                    productDB.quantity -= item.quantity
-                    productDB.save()
+                    productDB.stock -= item.quantity
+                    await productDB.save()
                 }
                 else{
                     lists.rejectedProducts.push(item)
                 }
-            },{rejectedProducts:[], aceptedProducts:[]})
+            }
+            return lists
         } catch(error) {
             throw error
         }
@@ -36,10 +37,12 @@ class ProductService extends Service {
 
     calculatePrice = async (listProducts) => {
         try {
-            return listProducts.reduce(async (acum, item) => {
+            let acum = 0
+            for(const item of listProducts){
                 const productDB = await this.dao.getById(item.product)
                 acum += item.quantity * productDB.price
-            },0)
+            }
+            return acum
         } catch(error) {
             throw error
         }
