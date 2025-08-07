@@ -1,0 +1,655 @@
+{
+	"info": {
+		"_postman_id": "461f5669-f264-4eb6-8d9a-681daada1d1f",
+		"name": "Proyecto Final Urquiza",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32527561"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"first_name\": \"julio\",\r\n    \"last_name\": \"urquiza\",\r\n    \"age\": 24,\r\n    \"email\":\"julio.cesar.urquiza4@gmail.com\",\r\n    \"password\":\"1234\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"julio.cesar.urquiza4@gmail.com\",\r\n    \"password\":\"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sessions/current",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODhiYmUyMDAxNDA3MmJiNTVjZGVmZjMiLCJmaXJzdF9uYW1lIjoianVsaW8iLCJsYXN0X25hbWUiOiJ1cnF1aXphIiwiZW1haWwiOiJqdWxpby5jZXNhci51cnF1aXphNEBnbWFpbC5jb20iLCJhZ2UiOjI0LCJyb2xlIjoidXNlciIsImlhdCI6MTc1NDA3OTU2NSwiZXhwIjoxNzU0MDgzMTY1fQ.RHhBUI8r_nWOVs70rLiW_LIUs2rOkqNu9M2NBamkFBI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/sessions/current",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"sessions",
+						"current"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "emit token",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"julio.cesar.urquiza4@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/recover-password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"recover-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change pass",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1bGlvLmNlc2FyLnVycXVpemE0QGdtYWlsLmNvbSIsImlhdCI6MTc0NzQyMTYwOCwiZXhwIjoxNzQ3NDIyODA4fQ.juRwqyMrDUVwgmpmtysxdEhXrX9nmZXQ4yDQMIZgFxs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\":\"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1bGlvLmNlc2FyLnVycXVpemE0QGdtYWlsLmNvbSIsImlhdCI6MTc1Mzk5NTQ5OCwiZXhwIjoxNzUzOTk5MDk4fQ.zVlBhLzGqKEmsG8_rxOYbe8F7T15fQbORj_60vHJ__U",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reset-password",
+						"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1bGlvLmNlc2FyLnVycXVpemE0QGdtYWlsLmNvbSIsImlhdCI6MTc1Mzk5NTQ5OCwiZXhwIjoxNzUzOTk5MDk4fQ.zVlBhLzGqKEmsG8_rxOYbe8F7T15fQbORj_60vHJ__U"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/products/id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/products/67a3de90a15b725129004c0f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products",
+						"67a3de90a15b725129004c0f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/products?sort=asc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/products?sort=asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/products?sort=desc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/products?sort=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/products",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Laptop noGamer\",\r\n  \"description\": \"Potente laptop para gaming con procesador Intel i7 y tarjeta gráfica RTX 3060.\",\r\n  \"price\": 1500.99,\r\n  \"img\": \"https://example.com/laptop-gamer.jpg\",\r\n  \"code\": \"PRO0001\",\r\n  \"stock\": 20\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/products",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"title\": \"teclado\",\r\n        \"description\": \"Potente laptop para gaming con procesador Intel i7 y tarjeta gráfica RTX 3060.\",\r\n        \"price\": 1500.99,\r\n        \"img\": \"https://example.com/laptop-gamer.jpg\",\r\n        \"code\": \"PRO0001\",\r\n        \"stock\": 20\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/products/67a3efb0fbb2fce089696026",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products",
+						"67a3efb0fbb2fce089696026"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/products",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/products/67a3efb0fbb2fce089696026",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products",
+						"67a3efb0fbb2fce089696026"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/carts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI2YzIzZTcxYTEyMmJjYWYxZWM0ZDQiLCJmaXJzdF9uYW1lIjoianVsaW8iLCJsYXN0X25hbWUiOiJ1cnF1aXphIiwiZW1haWwiOiJqQGdtYWlsLmNvbSIsImNhcnJpdG8iOiI2ODI2YzIzZTcxYTEyMmJjYWYxZWM0ZDIiLCJhZ2UiOjI0LCJyb2xlIjoidXNlciIsImlhdCI6MTc0NzM3MTc3NSwiZXhwIjoxNzQ3MzcyOTc1fQ.NnTXwfZkAnLNHyjsrC7WMGvxGHAg5Xi0XqNXueGF-Xg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"products\":[\r\n        {\r\n            \"product\": \"67a3de90a15b725129004c0e\",\r\n            \"quantity\": 2\r\n        },\r\n        {\r\n            \"product\": \"67a3de90a15b725129004c0f\",\r\n            \"quantity\": 2\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/carts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/carts/:cid",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"products\":[\r\n        {\r\n            \"product\": \"67a3de90a15b725129004c0e\",\r\n            \"quantity\": 2\r\n        },\r\n        {\r\n            \"product\": \"67a3de90a15b725129004c0f\",\r\n            \"quantity\": 2\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/carts/67a4f5e1ef134b8344a2c1c5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carts",
+						"67a4f5e1ef134b8344a2c1c5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/carts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI2YzIzZTcxYTEyMmJjYWYxZWM0ZDQiLCJmaXJzdF9uYW1lIjoianVsaW8iLCJsYXN0X25hbWUiOiJ1cnF1aXphIiwiZW1haWwiOiJqQGdtYWlsLmNvbSIsImNhcnJpdG8iOiI2ODI2YzIzZTcxYTEyMmJjYWYxZWM0ZDIiLCJhZ2UiOjI0LCJyb2xlIjoidXNlciIsImlhdCI6MTc0NzM3MzE2MCwiZXhwIjoxNzQ3Mzc0MzYwfQ.Y-g9CmNIwwf-TBV_N-0QlWnnuwDqDRUXITatEL8zo6o",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product\": \"67a3de90a15b725129004c0e\",\r\n    \"quantity\": 4\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/carts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/carts/addProduct",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODhmYjg2ZjI1YzgxMGNmNTQ0OTUzMTYiLCJmaXJzdF9uYW1lIjoianVsaW8iLCJsYXN0X25hbWUiOiJ1cnF1aXphIiwiZW1haWwiOiJqdWxpby5jZXNhci51cnF1aXphNEBnbWFpbC5jb20iLCJjYXJ0IjoiNjg4ZmI4NmYyNWM4MTBjZjU0NDk1MzE0IiwiYWdlIjoyNCwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTQzNDI3NzAsImV4cCI6MTc1NDM0NjM3MH0.wKIIhPxC9pRB3dg-ptqv1n_1_TfZz1Bh1D3M4O-RrRw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"product\": \"67a3de90a15b725129004c0f\",\r\n        \"quantity\": 2\r\n    },\r\n    {\r\n        \"product\": \"67a3de90a15b725129004c0e\",\r\n        \"quantity\": 2\r\n    }\r\n]\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/carts/addProduct",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carts",
+						"addProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/cats/:cid/products/:pid",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI2YzIzZTcxYTEyMmJjYWYxZWM0ZDQiLCJmaXJzdF9uYW1lIjoianVsaW8iLCJsYXN0X25hbWUiOiJ1cnF1aXphIiwiZW1haWwiOiJqQGdtYWlsLmNvbSIsImNhcnJpdG8iOiI2ODI2YzIzZTcxYTEyMmJjYWYxZWM0ZDIiLCJhZ2UiOjI0LCJyb2xlIjoidXNlciIsImlhdCI6MTc0NzM3MzE2MCwiZXhwIjoxNzQ3Mzc0MzYwfQ.Y-g9CmNIwwf-TBV_N-0QlWnnuwDqDRUXITatEL8zo6o",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product\": \"67a3de90a15b725129004c10\",\r\n    \"quantity\": 490\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/carts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/cats/:cid",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"product\": \"67a3de90a15b725129004c10\",\r\n        \"quantity\": 40\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/carts/67a4f5e1ef134b8344a2c1c5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carts",
+						"67a4f5e1ef134b8344a2c1c5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/cats/:cid",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI2OTcxMWM1YzlmNzhkZmM5OTMxMmEiLCJmaXJzdF9uYW1lIjoianVsaW8iLCJsYXN0X25hbWUiOiJ1cnF1aXphIiwiZW1haWwiOiJqQGdtYWlsLmNvbSIsImNhcnJpdG8iOiI2ODI2OTcxMWM1YzlmNzhkZmM5OTMxMjgiLCJhZ2UiOjI0LCJyb2xlIjoidXNlciIsImlhdCI6MTc0NzM2Njk3NCwiZXhwIjoxNzQ3MzY4MTc0fQ.y5YRa-fpMk5wmqAR4FIWWnbCqE3QB5tCJv2YCe7oRCE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/carts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/cats/:cid/products/:pid",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/carts/67a44e5882a2f86c97549502/products/67a3de90a15b725129004c0e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carts",
+						"67a44e5882a2f86c97549502",
+						"products",
+						"67a3de90a15b725129004c0e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/carts/purchase",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODhmYjg2ZjI1YzgxMGNmNTQ0OTUzMTYiLCJmaXJzdF9uYW1lIjoianVsaW8iLCJsYXN0X25hbWUiOiJ1cnF1aXphIiwiZW1haWwiOiJqdWxpby5jZXNhci51cnF1aXphNEBnbWFpbC5jb20iLCJjYXJ0IjoiNjg4ZmI4NmYyNWM4MTBjZjU0NDk1MzE0IiwiYWdlIjoyNCwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTQyNTA1NTMsImV4cCI6MTc1NDI1NDE1M30.9q9DH52GKho8Nn2prsy8dGvBFQ_lr73X6fLT7tTPbnk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/carts/purchase",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carts",
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

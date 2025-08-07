@@ -1,6 +1,5 @@
 import CustomRouter from "./custom.router.js"
 import productController from "../controllers/product-controller.js"
-import checkRoles from "../middlewares/checkRoles.js"
 
 class router extends CustomRouter{
     init() {
@@ -10,19 +9,19 @@ class router extends CustomRouter{
         // -page permitirá devolver la página que queremos buscar, en caso de no recibir page, ésta será de 1
         // -query, el tipo de elemento que quiero buscar (es decir, qué filtro aplicar), en caso de no recibir query, realizar la búsqueda general
         // -sort: asc/desc, para realizar ordenamiento ascendente o descendente por precio, en caso de no recibir sort, no realizar ningún ordenamiento
-        this.get('/', checkRoles(['PUBLIC']), productController.traerDeProductosFormateados)
+        this.get('/', ['PUBLIC'], productController.traerDeProductosFormateados)
 
         //ruta get retorna el un producto por el id
-        this.get('/:id', checkRoles(['PUBLIC']), productController.traerProductoPorId)
+        this.get('/:id', ['PUBLIC'], productController.traerProductoPorId)
 
         //ruta post para products
-        this.post('/', checkRoles(['ADMIN']), productController.crearProducto)
+        this.post('/', ['ADMIN'], productController.crearProducto)
 
         //ruta put para modificar productos
-        this.put('/:id', checkRoles(['ADMIN']), productController.modificarProducto)
+        this.put('/:id', ['ADMIN'], productController.modificarProducto)
 
         //ruta put para eliminar productos
-        this.delete('/:id', checkRoles(['ADMIN']), productController.eliminarProducto)
+        this.delete('/:id', ['ADMIN'], productController.eliminarProducto)
     }
 }
 

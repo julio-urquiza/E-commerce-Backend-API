@@ -1,4 +1,5 @@
 import { Router } from "express"
+import checkRoles from "../middlewares/checkRoles.js"
 
 export default class CustomRouter {
     constructor() {
@@ -14,20 +15,20 @@ export default class CustomRouter {
         this.router.use(...middlewares)
     }
 
-    get(path, ...callbacks) {
-        this.router.get(path, this.resolveCallbacks(callbacks))
+    get(path, permissions,  ...callbacks) {
+        this.router.get(path, checkRoles(permissions), this.resolveCallbacks(callbacks))
     }
 
-    post(path, ...callbacks) {
-        this.router.post(path, this.resolveCallbacks(callbacks))
+    post(path, permissions,  ...callbacks) {
+        this.router.post(path, checkRoles(permissions),  this.resolveCallbacks(callbacks))
     }
 
-    put(path, ...callbacks) {
-        this.router.put(path, this.resolveCallbacks(callbacks))
+    put(path, permissions,  ...callbacks) {
+        this.router.put(path, checkRoles(permissions),  this.resolveCallbacks(callbacks))
     }
 
-    delete(path, ...callbacks) {
-        this.router.delete(path, this.resolveCallbacks(callbacks))
+    delete(path, permissions,  ...callbacks) {
+        this.router.delete(path, checkRoles(permissions),  this.resolveCallbacks(callbacks))
     }
 
     resolveCallbacks(callbacks) {
@@ -41,6 +42,6 @@ export default class CustomRouter {
     }
 
     init() {
-        throw new Error("Metodo init() no implementado")
+        throw new Error("Init() method not implemented")
     }
 }
