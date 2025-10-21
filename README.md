@@ -26,13 +26,20 @@ src/
 │   ├── orderModel.js
 │   └── productModel.js
 ├── routes/
-│   ├── authRoutes.js
-│   ├── orderRoutes.js
-│   └── productRoutes.js
+│   ├── cart.router.js
+│   ├── custom.router.js
+│   ├── index.router.js
+│   ├── product.router.js
+│   └── user-router.js
 ├── middlewares/
-│   └── authMiddleware.js
+    ├── verifyTokenPass.js
+│   └── cehckRoles.js
 └── utils/
-    └── logger.js
+    ├── custom-error.js
+    ├── mailer.js
+    ├── random-string.js
+    ├── user-bcrypt-utils.js
+    └── user.jwt.js
 ```
 
 * **controllers/**: Contiene la lógica de negocio para cada recurso.
