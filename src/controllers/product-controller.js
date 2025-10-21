@@ -12,10 +12,10 @@ class ProductController {
             let opciones = {limit: parseInt(limit), page: parseInt(page)}
     
             let query = req.query.query? JSON.parse(req.query.query) : {}
-    
+            
             if(sort === 'asc') opciones.sort = {price: 1}
             if(sort === 'desc') opciones.sort = {price: -1}
-    
+            
             const products = await this.service.paginate(query, opciones)
             res.json({
                 status: 'success',
