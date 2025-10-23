@@ -14,7 +14,10 @@ class UserService extends Service{
 
     register = async (body) => {
         try {
-            const { email, password } = body
+            const { email, password,first_name,last_name,age } = body
+            if(!email || !password || !first_name || !last_name || !age) {
+                throw new CustomError("Faltan datos requeridos", 400)
+            }
             const existUser = await this.dao.getByEmail(email)
             if (existUser) throw new CustomError("El usuario ya existe", 400)
             const carrito = await cartService.create({products:[]})
