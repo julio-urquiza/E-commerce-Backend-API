@@ -1,105 +1,104 @@
-# Proyecto Final Backend 2
+# E-commerce Backend API
 
-## Descripción
+## Description
+This is a RESTful API for an e-commerce platform built with Node.js, Express, and MongoDB. The project implements user authentication, product management, shopping cart functionality, and order processing.
 
-Este proyecto corresponde al curso de **Diseño y Arquitectura Backend 2** de Coderhouse. Se trata de una API RESTful desarrollada con **Node.js** y **Express**, diseñada para gestionar usuarios, productos y órdenes en un sistema de comercio electrónico.
+## Features
+- User authentication (register, login, password recovery)
+- Product management (CRUD operations)
+- Shopping cart functionality
+- Order processing
+- Email notifications
+- Role-based access control (Admin/User)
+- API documentation with Swagger
+- JWT token authentication
+- Password encryption with bcrypt
 
-## Tecnologías Utilizadas
+## Tech Stack
+- Node.js
+- Express
+- MongoDB with Mongoose
+- JWT for authentication
+- Bcrypt for password hashing
+- Nodemailer for email services
+- Swagger for API documentation
+- Passport for authentication middleware
 
-* **Node.js**: Entorno de ejecución de JavaScript.
-* **Express**: Framework minimalista para aplicaciones web.
-* **MongoDB**: Base de datos NoSQL.
-* **Mongoose**: ODM para MongoDB.
-* **JWT**: Autenticación basada en tokens.
-* **bcryptjs**: Encriptación de contraseñas.
+## Installation
 
-## Estructura del Proyecto
-
-```plaintext
-src/
-├── controllers/
-│   ├── authController.js
-│   ├── orderController.js
-│   └── productController.js
-├── models/
-│   ├── userModel.js
-│   ├── orderModel.js
-│   └── productModel.js
-├── routes/
-│   ├── cart.router.js
-│   ├── custom.router.js
-│   ├── index.router.js
-│   ├── product.router.js
-│   └── user-router.js
-├── middlewares/
-    ├── verifyTokenPass.js
-│   └── cehckRoles.js
-└── utils/
-    ├── custom-error.js
-    ├── mailer.js
-    ├── random-string.js
-    ├── user-bcrypt-utils.js
-    └── user.jwt.js
+1. Clone the repository
+```bash
+git clone <repository-url>
 ```
 
-* **controllers/**: Contiene la lógica de negocio para cada recurso.
-* **models/**: Define los esquemas y modelos de datos.
-* **routes/**: Define las rutas y los controladores asociados.
-* **middlewares/**: Funciones intermedias para procesar las solicitudes.
-* **utils/**: Funciones auxiliares y utilitarias.
+2. Install dependencies
+```bash
+npm install
+```
 
-## Instalación
+3. Create a .env file in the root directory with the following variables:
+```env
+PUERTO=8080
+MONGO_URL=your_mongodb_connection_string
+CLAVE=your_jwt_secret_key
+CLAVEPASS=your_password_reset_secret
+MAIL_USER=your_email@example.com
+MAIL_PASS=your_email_password
+```
 
-1. Clona el repositorio:
+4. Run the application
+```bash
+# Development mode
+npm run dev
 
-   ```bash
-   git clone https://github.com/julio-urquiza/Proyecto-Final-BackEnd-2.git
-   cd Proyecto-Final-BackEnd-2
-   ```
+# Production mode
+npm start
+```
 
-2. Instala las dependencias:
+## API Documentation
 
-   ```bash
-   npm install
-   ```
+The API documentation is available at `/api-docs` when the server is running. It provides detailed information about all available endpoints.
 
-3. Crea un archivo `.env` a partir del ejemplo:
+### Main Endpoints
 
-   ```bash
-   cp .env.example .env
-   ```
+#### Users
+- POST `/api/register` - Register new user
+- POST `/api/login` - User login
+- GET `/api/sessions/current` - Get current user
+- GET `/api/recover-password` - Request password recovery
+- PUT `/api/reset-password/:token` - Reset password
 
-4. Configura las variables de entorno en el archivo `.env`.
+#### Products
+- GET `/api/products` - Get all products
+- GET `/api/products/:id` - Get product by ID
+- POST `/api/products` - Create product (Admin only)
+- PUT `/api/products/:id` - Update product (Admin only)
+- DELETE `/api/products/:id` - Delete product (Admin only)
 
-5. Inicia el servidor:
+#### Cart
+- POST `/api/carts` - Create new cart
+- GET `/api/carts` - Get cart contents
+- POST `/api/carts/AddProduct` - Add product to cart
+- DELETE `/api/carts/products/:pid` - Remove product from cart
+- POST `/api/carts/purchase` - Complete purchase
 
-   ```bash
-   npm start
-   ```
+## Project Structure
+```
+src/
+├── app.js                 # Application entry point
+├── config/               # Configuration files
+├── controllers/          # Route controllers
+├── daos/                # Data Access Objects
+├── dtos/                # Data Transfer Objects
+├── middlewares/         # Custom middlewares
+├── routes/              # Route definitions
+├── services/            # Business logic
+├── swagger/             # API documentation
+└── utils/               # Utility functions
+```
 
-El servidor estará corriendo en `http://localhost:3000`.
+## Error Handling
+The API uses custom error handling middleware to provide consistent error responses across all endpoints.
 
-## Endpoints Principales
-
-### Autenticación
-
-* **POST** `/api/auth/register`: Registra un nuevo usuario.
-* **POST** `/api/auth/login`: Inicia sesión y obtiene un token JWT.
-
-### Productos
-
-* **GET** `/api/products`: Obtiene todos los productos.
-* **GET** `/api/products/:id`: Obtiene un producto por su ID.
-* **POST** `/api/products`: Crea un nuevo producto.
-* **PUT** `/api/products/:id`: Actualiza un producto existente.
-* **DELETE** `/api/products/:id`: Elimina un producto.
-
-### Órdenes
-
-* **GET** `/api/orders`: Obtiene todas las órdenes.
-* **GET** `/api/orders/:id`: Obtiene una orden por su ID.
-* **POST** `/api/orders`: Crea una nueva orden.
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+## License
+This project is licensed under the ISC License.
